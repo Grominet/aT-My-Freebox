@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+// c'est parti!
+
+// on charge les libs…
+//<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+//<script type="text/javascript" src="json.min.js"></script>
+<script type="text/javascript">
+//jQuery.noConflict()
+
+// on initie les Listener
+// pour la commande et l'affichage dans le menu
+safari.application.addEventListener("command", handleCommand, false);
+safari.application.addEventListener("validate", validateCommand, false);
+// pour afficher la page de dons
+safari.extension.settings.addEventListener("change", settingsChangeHandler, false);
+
+// function des dons
+// c'est un de mes premiers codes, alors c'est juste histoire de motiver, mais surtout de savoir si ça plait suffisament pour mériter qq euros.
+function settingsChangeHandler(event)
+{
+    // ouverture de la page au bouton coché dans les prefs
+    if (event.key === "donate") {
+		if (safari.extension.settings.donate == true){
+			var myWin = safari.application.openBrowserWindow();
+			myWin.activeTab.url="http:/blog.aube-tech.com/dons";
+			safari.extension.settings.donate = false; //reset du bouton
+		}
+    }
+}
+
+// -----------------
+// enfin ça commence
+
+function handleCommand(event)
+{
+    // On vérifie que c'est la bonne commande (le clic dans le menu)
+    if (event.command !== "newDownload")
+        return; //sinon on sort
+        
+    // besoin d'un script injecté ici, sinon impossible de retrouver le lien cliqué
+    // voir injected.js
+
+    // On test si on vise un lien, sinon… on sort
+    if (!event.userInfo || !event.userInfo.target_url)
+        return;
+    
+    // On envoi l'url à la fonction de téléchargement
+    torrent_url = event.userInfo.target_url;
+    
+    //alert(torrent_url); //pour debug
+    download(torrent_url);
+}
+
+//
+function validateCommand(event)
+{
+    if (event.command !== "newDownload")
+        return;     
+    // On test si on vise un lien, sinon… on sort
+    if (!event.userInfo || !event.userInfo.target_url)
+        event.target.disabled = true;
+        return;	
+}
+
+
+// -----------------
+// les fonctions :
+//  login
+//  download
+//      http
+//      .torrent
+//      magnet
+
+// Fonctions maître "download"
+function download(url){
+alert(url); //pour debug
+
+}
+
+
+
+
+// fin
+</script>
+</head>
+</html>
