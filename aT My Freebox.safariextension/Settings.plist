@@ -12,5 +12,33 @@
 		<key>Type</key>
 		<string>CheckBox</string>
 	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>freebox</string>
+		<key>Key</key>
+		<string>identifiant</string>
+		<key>Title</key>
+		<string>Identifiant</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>syxosa87</string>
+		<key>Key</key>
+		<string>password</string>
+		<key>Password</key>
+		<true/>
+		<key>Secure</key>
+		<false/>
+		<key>Title</key>
+		<string>Mot de passe Freebox</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>token</string>
+	</dict>
 </array>
 </plist>

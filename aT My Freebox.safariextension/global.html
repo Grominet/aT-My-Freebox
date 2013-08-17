@@ -1,5 +1,13 @@
-<script type="text/javascript" src="atmyfreebox.js"></script>
+<!DOCTYPE HTML>
+<html>
+<head>
+// c'est parti!
+
+// on charge les libs…
+//<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+//<script type="text/javascript" src="json.min.js"></script>
 <script type="text/javascript">
+//jQuery.noConflict()
 
 // on initie les Listener
 // pour la commande et l'affichage dans le menu
@@ -14,7 +22,7 @@ function settingsChangeHandler(event)
 {
     // ouverture de la page au bouton coché dans les prefs
     if (event.key === "donate") {
-		if (safari.extension.settings.donate === true){
+		if (safari.extension.settings.donate == true){
 			var myWin = safari.application.openBrowserWindow();
 			myWin.activeTab.url="http:/blog.aube-tech.com/dons";
 			safari.extension.settings.donate = false; //reset du bouton
@@ -41,7 +49,6 @@ function handleCommand(event)
     // On envoi l'url à la fonction de téléchargement
     torrent_url = event.userInfo.target_url;
     
-    //voir atmyfreebox.js pour le code!
     //alert(torrent_url); //pour debug
     download(torrent_url);
 }
@@ -57,5 +64,25 @@ function validateCommand(event)
         return;	
 }
 
+
+// -----------------
+// les fonctions :
+//  login
+//  download
+//      http
+//      .torrent
+//      magnet
+
+// Fonctions maître "download"
+function download(url){
+alert(url); //pour debug
+
+}
+
+
+
+
 // fin
 </script>
+</head>
+</html>

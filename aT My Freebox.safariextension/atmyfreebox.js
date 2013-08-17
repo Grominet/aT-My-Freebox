@@ -48,7 +48,7 @@ function login(){
     
     xhr.open('POST', (adresse_freebox + '/api/v1/login/authorize/'));
     //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //ça marche aussi, mais très propre car on envoi du JSON
-    xhr.setRequestHeader("Content-Type", "application/json"; "charset", "utf-8");
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(TokenRequest));
     
     xhr.onreadystatechange = function() {
