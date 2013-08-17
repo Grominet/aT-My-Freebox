@@ -1,6 +1,6 @@
 aT-My-Freebox
 =============
-http://blog.aube-tech.com/
+http://blog.aube-tech.com/category/at-my-freebox/
 
 Télécharger sur votre freebox depuis Safari
 

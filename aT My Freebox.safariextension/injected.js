@@ -8,17 +8,16 @@ var lastContextMenuEventTime;
 // Register for the contextmenu event.
 document.addEventListener("contextmenu", handleContextMenu, false);
 
-// use custom traverser to avoid including jQuery here, since this method
-// is called on *every* page load
+// on cherche le noeud sur lequel on a cliqué (qui n'est pas HTML)
 function findParentNode(parentTagName, childObj) {
     var testObj = childObj;
-    while(testObj.tagName != parentTagName) {
+    while(testObj.tagName !== parentTagName) {
         testObj = testObj.parentNode;
-        if (testObj.tagName == 'HTML') {
+        if (testObj.tagName === 'HTML') {
             return null;
         };
     }
-    return testObj;
+    return testObj; // on retourne le tag
 }
 
 function handleContextMenu(event)
@@ -26,10 +25,10 @@ function handleContextMenu(event)
 	// remonte le noeud jusqu'au lien (balise "A")
     lastRightClickedElement = event.target;
     lastContextMenuEventTime = new Date().getTime();
-    target = findParentNode('A', event.target)
+    target = findParentNode('A', event.target);
     
     // réponse seulement si c'est un lien
-    if (target != null) {
+    if (target !== null) {
         // Pass the right-clicked element's target url and the timestamp up to the global page.
         safari.self.tab.setContextMenuEventUserInfo(event, {
             "timestamp": lastContextMenuEventTime, "target_url": target.href });
