@@ -8,9 +8,9 @@ Ce projet à pour but de développer une extension à Safari permettant de tél�
 un ftp ou un torrent (magnet inclus) depuis un menu contextuel (clic-droit) directement sur votre Freebox.
 
 Nécessite :
-- Safari
-- Freebox v6
-- un fichier
+- Safari (v6+)
+- Freebox v6 (avec Freebox Os : v2+)
+- un fichier torrent (ou lien magnet)
 
 Projets similaires :
 - Download on my Freebox    http://code.google.com/p/download-on-my-freebox/
@@ -21,4 +21,5 @@ Projets similaires :
 
 Pourquoi ?
 Parce qu'aucune des extensions ci-dessus ne fonctionne, elles sont soit incompatibles avec Safari, soit non maintenues, soit non prévues pour la Freebox.
-
+Parceque j'ai envie de faire l'extension à ma manière plutôt que modifier une existante.
+Parcequ'aucun de ces projets n'utilise la nouvelle API freebox OS.
