@@ -14,31 +14,25 @@
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
-		<string>freebox</string>
+		<string>http://mafreebox.freebox.fr</string>
 		<key>Key</key>
-		<string>identifiant</string>
+		<string>adresse_freebox</string>
 		<key>Title</key>
-		<string>Identifiant</string>
-		<key>Type</key>
-		<string>TextField</string>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>syxosa87</string>
-		<key>Key</key>
-		<string>password</string>
-		<key>Password</key>
-		<true/>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Mot de passe Freebox</string>
+		<string>Adresse Freebox</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
 	<dict>
 		<key>Key</key>
-		<string>token</string>
+		<string>app_token</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>session_token</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>challenge</string>
 	</dict>
 </array>
 </plist>

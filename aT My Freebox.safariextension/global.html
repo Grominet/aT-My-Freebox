@@ -1,88 +1,64 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-// c'est parti!
-
-// on charge les libs…
-//<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
-//<script type="text/javascript" src="json.min.js"></script>
-<script type="text/javascript">
-//jQuery.noConflict()
-
-// on initie les Listener
-// pour la commande et l'affichage dans le menu
+    <!-- 
+        EXTENSION MODE
+    -->
+<script type="text/javascript" src="sha1.js"></script>
+<script type="text/javascript" src="atmyfreebox.js"></script>
+<script>
+// -----------   EXTENSION MODE  --------------
+// on initie les Listener pour détecter le clic-droit et le lancement de l'extension
 safari.application.addEventListener("command", handleCommand, false);
 safari.application.addEventListener("validate", validateCommand, false);
-// pour afficher la page de dons
 safari.extension.settings.addEventListener("change", settingsChangeHandler, false);
 
-// function des dons
-// c'est un de mes premiers codes, alors c'est juste histoire de motiver, mais surtout de savoir si ça plait suffisament pour mériter qq euros.
+//variable de test:
+var url = "" //fourni par le clic-droit
+var adresse_freebox = safari.extension.settings.adresse_freebox;
+var app_token = safari.extension.settings.app_token;            //vide = force une nouvelle autorisation
+var session_token = safari.extension.settings.session_token;    //vide = force une nouvelle session
+var challenge = safari.extension.settings.challenge;            //vide = force une demande de nouveau challenge
+var safari_extension = true;                                    //true = on passe par l extension safari
+// ---------------------------------------
+
+
+// ouverture de la page au clic dans l'option
 function settingsChangeHandler(event)
 {
-    // ouverture de la page au bouton coché dans les prefs
     if (event.key === "donate") {
 		if (safari.extension.settings.donate == true){
 			var myWin = safari.application.openBrowserWindow();
 			myWin.activeTab.url="http:/blog.aube-tech.com/dons";
-			safari.extension.settings.donate = false; //reset du bouton
+			safari.extension.settings.donate = false;
 		}
     }
 }
 
-// -----------------
-// enfin ça commence
-
+// On vérifie que c'est la bonne commande (le clic dans le menu)
 function handleCommand(event)
 {
-    // On vérifie que c'est la bonne commande (le clic dans le menu)
     if (event.command !== "newDownload")
         return; //sinon on sort
-        
-    // besoin d'un script injecté ici, sinon impossible de retrouver le lien cliqué
-    // voir injected.js
-
-    // On test si on vise un lien, sinon… on sort
+    // On re-test si on vise un lien, sinon… on sort
     if (!event.userInfo || !event.userInfo.target_url)
         return;
-    
-    // On envoi l'url à la fonction de téléchargement
-    torrent_url = event.userInfo.target_url;
-    
-    //alert(torrent_url); //pour debug
-    download(torrent_url);
+    // On reçoit l'url du script injecté
+    url = event.userInfo.target_url;
+    //alert(url);
+    download(url); // on envoi l'URL au script Javascript pour la liaison à la freebox
 }
 
-//
+// On test si on vise un lien, sinon… on sort
 function validateCommand(event)
 {
     if (event.command !== "newDownload")
         return;     
-    // On test si on vise un lien, sinon… on sort
     if (!event.userInfo || !event.userInfo.target_url)
         event.target.disabled = true;
-        return;	
+      return;	
 }
 
-
-// -----------------
-// les fonctions :
-//  login
-//  download
-//      http
-//      .torrent
-//      magnet
-
-// Fonctions maître "download"
-function download(url){
-alert(url); //pour debug
-
-}
-
-
-
-
-// fin
 </script>
 </head>
 </html>
