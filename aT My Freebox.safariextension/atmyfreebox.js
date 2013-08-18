@@ -1,4 +1,20 @@
-
+/**
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Author: Arnaud LECLAIRE © 2013 */
+ 
 // let's go
 
 // -----------------------------------------------------------------------------
@@ -7,13 +23,13 @@
 //  url : url cliqué à téléchargé avec l'extension
 //  app_token : la pass phrase liée à l'autorisation utilisé pour obtenir une session / vide si première connexion
 //  challenge : le pass temporaire pour obtenir une session
-//  session_token : 
+//  session_token : le token temporaire de la session en cours
 // -----------------
 // les fonctions :
 //  download        fonction maitre, obtient l'URL cliqué
 //  authorize       obtient l'autorisation "app_token"
 //  test_authorize  test que l'autorisation est validée
-//  get_challenge   obtient le numéro de challenge temporaire
+//  get_challenge   obtient le numéro de challenge temporaire (pour une session)
 //  session         obtient le token_session pour enfin communiquer avec la freebox
 //  download_list   fonction pour le fun, obtient la liste des téléchargements en cours
 //  download_add    ajoute un fichier au téléchargement de la freebox
@@ -24,6 +40,8 @@
 function download(url){
     //alert("url: "+url);
     console.info("URL= "+url);
+    
+    url=encodeURIComponent(url);
     
     // il faut tester si déjà autorisé (app_token déjà enregistré)
     if (!app_token){
@@ -40,7 +58,6 @@ function download(url){
         }
     }
 }
-
 
 function authorize(){
     //alert("authorize");
@@ -67,8 +84,7 @@ function authorize(){
         var reponse = JSON.parse(xhr.response);
         if (reponse.success) {
             console.info("success!");
-            app_token = reponse.result.app_token; // AJOUT "var" = à modif pour extension safari
-            //APPTOKEN = app_token;
+            app_token = reponse.result.app_token;
             var track_id = reponse.result.track_id
             console.info("App_token: "+ app_token);
             console.info("Track_ID: "+ track_id);

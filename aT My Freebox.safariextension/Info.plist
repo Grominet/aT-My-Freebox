@@ -56,6 +56,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>http://prod.aube-tech.com/atmyfreebox_manifest.plist</string>
 	<key>Website</key>
 	<string>http://blog.aube-tech.com</string>
 </dict>
