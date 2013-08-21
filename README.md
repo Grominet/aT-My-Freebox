@@ -2,7 +2,7 @@ aT-My-Freebox
 =============
 http://blog.aube-tech.com/category/at-my-freebox/
 
-Télécharger sur votre freebox depuis Safari
+Télécharger sur votre Freebox depuis Safari
 
 Ce projet à pour but de développer une extension à Safari permettant de télécharger un fichier, 
 un ftp ou un torrent (magnet inclus) depuis un menu contextuel (clic-droit) directement sur votre Freebox.
@@ -10,7 +10,7 @@ un ftp ou un torrent (magnet inclus) depuis un menu contextuel (clic-droit) dire
 Nécessite :
 - Safari (v6+)
 - Freebox v6 (avec Freebox Os : v2+)
-- un fichier torrent (ou lien magnet)
+- un fichier torrent (ou lien magnet) ou n'importe quel fichier
 
 Projets similaires :
 - Download on my Freebox    http://code.google.com/p/download-on-my-freebox/
@@ -21,5 +21,5 @@ Projets similaires :
 
 Pourquoi ?
 Parce qu'aucune des extensions ci-dessus ne fonctionne, elles sont soit incompatibles avec Safari, soit non maintenues, soit non prévues pour la Freebox.
-Parceque j'ai envie de faire l'extension à ma manière plutôt que modifier une existante.
+Parceque j'ai envie de faire une extension afin d'apprendre plutôt que modifier une existante. (Et le code est ici pour ceux que ça intéresse).
 Parcequ'aucun de ces projets n'utilise la nouvelle API freebox OS.
