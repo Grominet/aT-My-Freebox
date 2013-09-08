@@ -12,7 +12,7 @@
        <key>CFBundleVersion</key>
        <string>1</string>
        <key>CFBundleShortVersionString</key>
-       <string>1.0</string>
+       <string>1.1</string>
        <key>http://prod.aube-tech.com/atmyfreebox_manifest.plist</key>
        <string>AtMyFreebox.safariextz</string>
      </dict>

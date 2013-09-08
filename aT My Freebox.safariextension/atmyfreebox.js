@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Arnaud LECLAIRE © 2013 */
- 
+
 // let's go
 
 // -----------------------------------------------------------------------------
@@ -41,6 +41,8 @@ function download(url){
     //alert("url: "+url);
     console.info("URL= "+url);
     
+    
+    
     url=encodeURIComponent(url);
     
     // il faut tester si déjà autorisé (app_token déjà enregistré)
@@ -49,8 +51,8 @@ function download(url){
     }
     else
     {
-        if (!session_token){ // on test si une session est présente
-            get_challenge(); //si non on en demande une
+        if (!session_token){ // on test si la session est valide
+            get_challenge(); //si non on en demande une nouvelle
         }
         else
         {
@@ -59,15 +61,21 @@ function download(url){
     }
 }
 
+function random_id(){
+var randomnumber=Math.floor(Math.random()*101);
+console.info("random id computer: "+randomnumber);
+return randomnumber;
+}
+
 function authorize(){
     //alert("authorize");
-    console.info("login");
+    console.info("authorize");
     var xhr = new XMLHttpRequest();
     var TokenRequest = {
         "app_id": "com.aube-tech.atmyfreebox",
         "app_name": "aT my Freebox",
-        "app_version": "0.0.2",
-        "device_name": "mon mac"
+        "app_version": "1.1.0",
+        "device_name": "mon mac ("+ random_id() +")"
     };
     xhr.open('POST', (adresse_freebox + '/api/v1/login/authorize/'));
     //xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); //ça marche aussi, mais pas très propre car on est en JSON
@@ -75,7 +83,7 @@ function authorize(){
     xhr.send(JSON.stringify(TokenRequest));
     
     // alert pour prévenir l'utilisateur qu'il faut cliquer manuellement
-    alert("Il faut autoriser l'extension At my Freebox sur l'afficheur LCD de la Freebox");
+    alert("Il faut autoriser l'extension \"At My Freebox\" directement sur l'afficheur LCD de la Freebox Server. Un petit appui sur le bouton tactile \">\" clignotant.");
     xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         console.info("login connexion ok! "+xhr.readyState+" - "+xhr.status);
@@ -133,11 +141,13 @@ function test_authorize(track_id){
                 else if (reponse.result.status == "denied"){
                     console.info("réponse denied: " + xhr.response);
                     alert("Euh? Il faut choisir \"OUI\" sur la Freebox...");
+                    return
                 }
                 else {
                     // NOK : refusé par l'utilisateur, timeout de 90s ou inconnu
                     console.info("réponse status: " + reponse.result.status);
                     alert("Pas de réponse? Il faut re-essayer");
+                    return
                 }
             }
             else {
@@ -207,12 +217,12 @@ function session() {
             var reponse = JSON.parse(xhr.response);
             if ( xhr.status === 200){
                 if (reponse.success) {
-                    session_token = reponse.result.session_token; // AJOUT "var" = à modif pour extension safari
+                    session_token = reponse.result.session_token;
                     if (safari_extension) { // enregistre en local si possible
                         safari.extension.session_token = session_token;
                     }
                     console.info("réponse session_token: " + reponse.result.session_token);
-                    console.info("session OK! au boulot... "+ session_token);
+                    console.info("session OK! au boulot... ");
                     //ready!
                     console.info("url: "+url)
                     download_add(url);
@@ -260,7 +270,14 @@ function download_list() {
 }//download_list
 
 function download_add(url_add) {
-    //alert("download add: "+url+" - "+session_token);
+    // ------------------------------------------------
+    // ajoute un download à la Freebox
+    // marche avec :
+    //      .torrent
+    //      :magnet
+    //      file à tester
+    // ------------------------------------------------
+    // alert("download add: "+url+" - "+session_token);
     console.info("url_add: "+url_add);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', (adresse_freebox + '/api/v1/downloads/add/'));
@@ -286,5 +303,48 @@ function download_add(url_add) {
         }//xhr.readyState
     }
 }//download_add
+
+function test(url) {
+    console.info("test");
+    //download_file(url); //test blob
+    download(url);
+}
+
+function download_file(url_file) {
+
+var xhr = new XMLHttpRequest();
+    xhr.open('GET', (url_file));
+    xhr.overrideMimeType('text/plain; charset=x-user-defined');
+    xhr.send();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.info("plop");
+            console.info(xhr.response);
+        }
+    }
+
+    //vérif que le browser n'est pas un tacot
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            alert('Contenu du fichier "' + url_file.name + '" :\n\n' + reader.result);
+        };
+        reader.readAsText(url_file);
+    }
+    else {
+    alert("Malheureusement, votre navigateur est complètement dépassé. At my Freebox ne peut continuer");
+    }
+    
+}
+
+function getBlob(url, callback) {
+    var xhr = new XMLHttpRequest();  // Create new XHR object
+    xhr.open("GET", url);            // Specify URL to fetch
+    xhr.responseType = "blob"        // We'd like a Blob, please
+    xhr.onload = function() {        // onload is easier than onreadystatechange
+        callback(xhr.response);      // Pass the blob to our callback
+    }                                // Note .response, not .responseText
+    xhr.send(null);                  // Send the request now
+}
 
 // fin
