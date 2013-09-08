@@ -13,8 +13,8 @@
        <string>2</string>
        <key>CFBundleShortVersionString</key>
        <string>1.1</string>
-       <key>http://prod.aube-tech.com/atmyfreebox_manifest.plist</key>
-       <string>AtMyFreebox.safariextz</string>
+       <key>URL</key>
+       <string>http://prod.aube-tech.com/AtMyFreebox.safariextz</string>
      </dict>
    </array>
 </dict>
