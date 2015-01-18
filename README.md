@@ -23,3 +23,11 @@ Pourquoi ?
 Parce qu'aucune des extensions ci-dessus ne fonctionne, elles sont soit incompatibles avec Safari, soit non maintenues, soit non prévues pour la Freebox.
 Parceque j'ai envie de faire une extension afin d'apprendre plutôt que modifier une existante. (Et le code est ici pour ceux que ça intéresse).
 Parcequ'aucun de ces projets n'utilise la nouvelle API freebox OS.
+
+A faire :
+- Gestion des torrents authentifiés (ex: t411)
+    (dans le principe : il faut télécharger le fichier puis l'envoyer à la box au lieu d'envoyer le lien)
+- Notification état des téléchargements (Maverick+ ou icone d'extension safari)
+
+
+Help welcome!
